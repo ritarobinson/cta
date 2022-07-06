@@ -80,13 +80,14 @@ def evaluate_guess(guess, default, totals, grids = []):
     global Gguesses_left
     global Ggem1
     global Ggem2
+    global Ggem3
     global Galready_guessed
 
     #making sure it's a valid guess
     if guess in grids:
 
         #correct guess
-        if guess == Ggem1 or guess == Ggem2:
+        if guess == Ggem1 or guess == Ggem2 or guess == Ggem3:
             Ggem_collected += 1
             Galready_guessed.clear()
             statement("** Hit! You've collected a gem. **", '*')
@@ -97,10 +98,11 @@ def evaluate_guess(guess, default, totals, grids = []):
             #generate gem coordinate
             Ggem1 = random.choice(grids)
             Ggem2 = random.choice(grids)
+            Ggem3 = random.choice(grids)
             print(default)
             
 
-        elif guess != Ggem1 or guess != Ggem2:
+        elif guess != Ggem1 or guess != Ggem2 or guess != Ggem3:
                         
             #duplicate error message [USABILITY TESTING - making sure user knows how to use game properly]
             if guess in Galready_guessed:
@@ -117,7 +119,8 @@ def evaluate_guess(guess, default, totals, grids = []):
             print('\n---  STATS  ---\n')
             print('Hits left: {}'.format(Gguesses_left))
             print('Gems collected: {}'.format(Ggem_collected))
-            print('Gems left: {}\n\n'.format(totals - Ggem_collected))
+            print('Gems left: {}\n'.format(totals - Ggem_collected))
+            print('PREVIOUSLY GUESSED: ', ', '.join(Galready_guessed), '\n\n')
             #changed grid
             grid(guess)
 
@@ -182,9 +185,9 @@ while keep_going == "":
         elif choice in yes:
             print('\n\nIn Collect Them All you will be trying to collect gems.\n')
             print('\nAt the start you will decide whether to play on a standard grid - 4 x 4 - or a hard grid - 5 x 5.')
-            print('\n--- Standard ---\nOn a STANDARD grid you will have to collect 6 gems to win.\nYou have 5 wrong guesses before it is Game Over.')
-            print('\n--- Hard ---\nOn a HARD grid you have to collect 10 gems to win.\nYou will have 8 wrong guesses till Game Over.\n')
-            print('\n- Once the game has started 2 gems will be randomly placed inside the selected grid.\nThey will stay in that coordinate until one has been guessed correctly.')
+            print('\n--- Standard ---\nOn a STANDARD grid you will have to collect 6 gems to win.\nYou have 8 wrong guesses before it is Game Over.')
+            print('\n--- Hard ---\nOn a HARD grid you have to collect 10 gems to win.\nYou will have 13 wrong guesses till Game Over.\n')
+            print('\n- Once the game has started 3 gems will be randomly placed inside the selected grid.\nThey will stay in that coordinate until one has been guessed correctly.')
             print('\n- Once you have correctly guessed the position of one of the gems, new gems will be randomly placed in the grid again, and your score will have gone up.')
             print('This will continue till you have either collected 6 or 10 gems, or have exceeded the defined wrong guesses.')
             print('\n\nPlease have fun :)\n')
@@ -202,12 +205,13 @@ while keep_going == "":
 
         #EASY LEVEL
         if Glevel in Gstrd:
-            Gguesses_left = 5
+            Gguesses_left = 8
             print('\nLEVEL: Standard   GRID: 4 x 4\n\n')
             gemdone = ""
             #generate gem coordinate
             Ggem1 = random.choice(grid4)
             Ggem2 = random.choice(grid4)
+            Ggem3 = random.choice(grid4)
             #visual default grid
             sgrid = "   A B C D\n 1 o o o o\n 2 o o o o\n 3 o o o o\n 4 o o o o\n"
             print(sgrid)
@@ -219,12 +223,12 @@ while keep_going == "":
                     if Ggem_collected == TOTAL_GEM4:
                         gemdone = False
                         print('GAME OVER')
-                        print('Well done, you have collected all gems!')
+                        statement('~~ Well done, you have collected all gems! ~', '~')
                         break
                     elif Gguesses_left <= 0:
                         gemdone = False
                         print('GAME OVER')
-                        print('You have run out of guesses.')
+                        statement('-- You have run out of guesses. --', '-')
                         break
                         
                     #ask for users guess
@@ -238,12 +242,13 @@ while keep_going == "":
 
         #HARD LEVEL
         elif Glevel in Ghard:
-            Gguesses_left = 8
+            Gguesses_left = 13
             print('\nLEVEL: Hard   GRID: 5 x 5\n\n')
             gemdone= ""
             #generate gem coordinate
             Ggem1 = random.choice(grid5)
             Ggem2 = random.choice(grid5)
+            Ggem3 = random.choice(grid5)
             #visual default grid
             hgrid = "   A B C D E\n 1 o o o o o\n 2 o o o o o\n 3 o o o o o\n 4 o o o o o\n 5 o o o o o\n"
             print(hgrid)
@@ -255,12 +260,12 @@ while keep_going == "":
                     if Ggem_collected == TOTAL_GEM5:
                         gemdone = False
                         print('GAME OVER')
-                        print('Well done, you have collected all gems!')
+                        statement('~~ Well done, you have collected all gems! ~', '~')
                         break
                     elif Gguesses_left <= 0:
                         gemdone = False
                         print('GAME OVER')
-                        print('You have run out of guesses.')
+                        statement('-- You have run out of guesses. --', '-')
                         break
                             
                     #ask for users guess
