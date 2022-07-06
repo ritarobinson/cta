@@ -6,6 +6,7 @@ import random
 #FUNCTIONS
 
 #grid formatting function - no.1
+ #userGuess - users guess from an input
 def grid(userGuess):
     row = userGuess[1]
 
@@ -51,6 +52,7 @@ def grid(userGuess):
             print(columns,"\n",blank.format(1),"\n",blank.format(2),"\n",blank.format(3),"\n",blank.format(4),"\n",gridtable(userGuess),"\n")
 
 #grid formatting function - no.2
+ #userGuess - users guess from an input
 def gridtable(userGuess):
 
     #initialising variables
@@ -73,7 +75,11 @@ def gridtable(userGuess):
         return("{} {} {} {} {} {}".format(row,place[0],place[1],place[2],place[3],place[4]))
 
 #output function
-def evaluate_guess(guess, default, totals, grids = []):
+ #guess - users guess
+ #default - blank grid
+ #totals - amount of gems required to solve
+ #grids - grid list of all possible coordinates
+def evaluate_guess(guess, default, totals, grids):
 
     #global variables
     global Ggem_collected
@@ -125,6 +131,8 @@ def evaluate_guess(guess, default, totals, grids = []):
             grid(guess)
 
 #guess error checking function [USABILITY TESTING - making sure user knows how to use game properly]
+ #question - guess question for input
+ #list - grid list of all possible coordinates
 def guess_check(question, list):
     while True:
         try:
@@ -140,6 +148,8 @@ def guess_check(question, list):
     
 
 #pretty output statments
+ #statement - text to print
+ #char - decoration character for statement
 def statement(statement, char):
     print()
     print(char*len(statement))
